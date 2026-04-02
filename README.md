@@ -2,6 +2,8 @@
 
 A Hyperledger Fabric smart contract for managing permissioned asset registry with document hash anchoring.
 
+https://hyperledger-fabric.readthedocs.io/en/release-2.5/test_network.html#before-you-begin
+
 ## Overview
 
 This chaincode implements a permissioned asset management system with:

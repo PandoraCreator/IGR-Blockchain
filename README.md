@@ -179,3 +179,31 @@ Binary location: `./asset-registry` (18MB)
 ---
 
 Ready for use with NestJS backend API or any application that needs permissioned asset management.
+
+
+## work summary for 3 arpil 2026
+
+
+Summary
+
+✅ What Works:
+
+ - Network fully operational (orderer + 2 peers listening and responding)
+ - Chaincode successfully deployed (asset-registry v1.0 on mychannel)
+ - RBAC enforcement active (Org1MSP can write, Org2MSP properly rejected with "only Org1MSP can create assets" error)
+ - REST API server running and responding on port 8080
+ - Transaction invocations accepted with status:200
+
+⚠️ Issue Encountered: Assets created via the chaincode invoke don't persist to the ledger. The peer accepts the write commands but the state isn't reaching the world state
+database. This is likely due to:
+
+ 1. Peer-to-orderer communication issue
+ 2. Orderer not properly committing transactions to the ledger
+ 3. Chaincode execution sandbox not properly writing to world state
+
+💡 Key Finding: The RBAC system is working perfectly - Org2MSP is properly denied write access with the exact error message from the chaincode, confirming the authorization 
+logic
+executes correctly.
+
+The infrastructure is operational, but there's a ledger persistence issue that would require either a network restart or investigation into the peer/orderer state management
+configuration

@@ -117,17 +117,19 @@ Emitted when ownership changes:
 
 ### Deploy to Channel
 ```bash
+cd fabric-samples/test-network
 ./network.sh deployCC -ccn asset-registry \
-  -ccp ../asset-transfer-basic/chaincode/asset-registry \
+  -ccp ../../asset-registry \
   -ccl go -ccv 1.0
 ```
+
 
 ### Test Create Asset (Org1)
 ```bash
 . ./scripts/envVar.sh && setGlobals 1
 peer chaincode invoke -C mychannel -n asset-registry \
   -c '{"function":"CreateAsset","Args":["asset-001","owner1","hash123","metadata"]}' \
-  --tls --cafile <path-to-ca-cert> -o localhost:7050
+  --tls --cafile <path-to-ca-cert> -o localhost:7051
 ```
 
 ### Test RBAC Enforcement (Org2)
